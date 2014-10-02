@@ -80,6 +80,17 @@ angular.module( "ngAutocomplete", [])
           }
         }
 
+        // Custom code to make autocomplete field pass autocomplete value to the model when enter is pressed
+        element.bind("keydown keypress", function(event) {
+          if(event.which === 13) {
+            scope.$apply(function () {
+                controller.$setViewValue(element.val());
+            });
+          }
+        });
+        // end of custom code
+
+
         if (scope.gPlace == undefined) {
           scope.gPlace = new google.maps.places.Autocomplete(element[0], {});
         }
